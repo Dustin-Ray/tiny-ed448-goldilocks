@@ -77,23 +77,7 @@ pub fn select(&self, index: u32) -> ProjectiveNielsPoint {
 ```
 This ensures fixed-time multiplication without the need for a curve point in Montgomery form. Further, we make use of the [crypto-bigint](https://github.com/RustCrypto/crypto-bigint) library which ensures fixed-time operations for our Scalar type. Field elements are represented by the fiat-crypto [p448-solinas-64](https://github.com/mit-plv/fiat-crypto/blob/master/fiat-rust/src/p448_solinas_64.rs) prime field. It is formally verified and heavily optimized at the machine-level.
 
-# 4. Benchmarks
-
-Run with:
-```bash
-cargo bench
-```
-
-Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
-
-| Operation   | ~Time (ms)  |
-|------------|------------|
-| Encrypt| 75 |
-| Decrypt| 75 |
-| Sign| 42 |
-| Verify| 18 |
-
-# 5. Signatures and DH:
+# 4. Signatures and DH:
 
 Using this crate as the elliptic-curve backend for [capyCRYPT](https://github.com/drcapybara/capyCRYPT), we have:
 
@@ -140,6 +124,22 @@ msg.verify(&key_pair.pub_key);
 // Assert correctness
 assert!(msg.op_result.unwrap());
 ```
+
+# 5. Benchmarks
+
+Run with:
+```bash
+cargo bench
+```
+
+Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
+
+| Operation   | ~Time (ms)  |
+|------------|------------|
+| Encrypt| 75 |
+| Decrypt| 75 |
+| Sign| 42 |
+| Verify| 18 |
 
 ## Acknowledgements
 
