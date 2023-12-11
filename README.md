@@ -120,7 +120,7 @@ Run with:
 cargo bench
 ```
 
-Approximate runtimes for Intel® Core™ i7-10710U × 12
+Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
 
 | Operation   | ~Time (ms)  |
 |------------|------------|
