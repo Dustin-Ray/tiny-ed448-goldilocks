@@ -1,15 +1,17 @@
 # Ed448-Goldilocks
 
-
 <p align="center">
   <img src="./img.webp" width="250" height="250">
 </p>
+
+A lean, high performance, pure rust implementation of Ed448-Goldilocks for easy signatures and key exchange.
 
 > WARNING: This software has not been audited. Use at your own risk.
 
 [![crates.io](https://img.shields.io/crates/v/tiny_ed448_goldilocks.svg)](https://crates.io/crates/tiny_ed448_goldilocks)
 [![Build Status](https://github.com/drcapybara/tiny_ed448_goldilocks/actions/workflows/rust.yml/badge.svg)](https://github.com/drcapybara/tiny_ed448_goldilocks/actions/workflows/rust.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/drcapybara/capyCRYPT/blob/master/LICENSE.txt) 
+
 
 # 1. Objective:
 
