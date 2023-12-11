@@ -17,29 +17,19 @@ A lean, high performance, pure rust implementation of Ed448-Goldilocks for easy 
 
 The Goldilocks variant of curves in Edward's form present a compelling balance of security and performance. We wish to leverage this curve to satisfy that the following group properties hold:
 
-
-$0 * G = 𝒪$
-
-$G * 1 = G$
-
-$G + (-G) = 𝒪$
-
-$2 * G = G + G$
-
-$4 * G > 𝒪$
-
-$r * G = 𝒪$
-
-$(k + 1) * G =  (k * G) + G$
-
-$k*G = (k % r) * G$
-
-$(k + t) * G = (k * G) + (t * G)$
-
-$k * (t * G) = t * (k * G) = (k * t % r) * G$
-
-$4 * G = 2 * (2 * G)$
-
+| Identities:  |
+|------------|
+| 0 * G = 𝒪 |
+| G * 1 = G |
+| G + (-G) = 𝒪|
+| 2 * G = G + G |
+| 4 * G = 2 * (2 * G) |
+| 4 * G > 𝒪 |
+| r * G = 𝒪 |
+| (k + 1) * G =  (k * G) + G |
+| k*G = (k % r) * G |
+| (k + t) * G = (k * G) + (t * G) |
+| k * (t * G) = t * (k * G) = (k * t % r) * G |
 
 ## What we want:
   - The fastest possible composition and doubling operations
@@ -56,9 +46,16 @@ Largely following the approaches of [this](https://github.com/crate-crypto/Ed448
 4. In variable_base_mul, we perform the doublings in twisted form, and the additions and fixed-time conditional negation in projective niels form.
 5. The point is returned in extended form, and finally converted to affine form for user-facing operations.
 
-At a higher level, we have:
+At a higher level, we have for:
 
-$s \cdot P = \text{Affine} \rightarrow \text{Extended} \rightarrow \text{Twisted} \rightarrow \text{Projective Niels} \rightarrow \text{Twisted} \rightarrow \text{Extended} \rightarrow \text{Affine}$
+| Affine | Extended | Twisted | Projective Niels |
+|--------|----------|---------|------------------|
+| (x, y) | (x, y, z, t) | (x, y, z, t1, t2) | (y + x, y - x, td, z) 
+
+Then our scalar multiplication would follow:
+
+Affine → Extended → Twisted → Projective Niels → Twisted → Extended → Affine
+
 
 # 3. Fixed-Time
 
