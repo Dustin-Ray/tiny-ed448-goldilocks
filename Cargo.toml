@@ -1,19 +1,18 @@
 [package]
 name = "tiny_ed448_goldilocks"
-version = "0.6.2"
+version = "0.1.0"
 edition = "2021"
 
 license = "MIT"
-keywords = ["aes", "fips202", "edwards", "ed448", "schnorr"]
+keywords = ["ed448-goldilocks", "elliptic-curve", "side-channel-analysis", "ed448", "schnorr"]
 readme = "README.md"
 authors = ["Dustin Ray (Dr. Capybara) <dustinray313@gmail.com>"]
-description = "An academic exercise in cryptographic algorithm design, pairing NIST FIPS 202 with a variety of Edwards curves."
-repository = "https://github.com/drcapybara/capyCRYPT"
+description = "A lean, pure rust implementation of Ed448-Goldilocks for easy signatures and key exchange."
+repository = "https://github.com/drcapybara/tiny_ed448_goldilocks"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-num = {version = "0.4.0"}
 hex = {version = "0.4.3"}
 byteorder = {version = "1.4.3"}
 chrono = {version = "0.4.23"}
@@ -21,7 +20,6 @@ criterion = "0.3"
 crypto-bigint = "0.5.3"
 fiat-crypto = "0.2.2"
 rand = "0.8"
-num-bigint = { version = "0.4", features = ["rand"] }
 capycrypt = "0.6.2"
 
 [profile.dev]

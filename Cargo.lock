@@ -664,7 +664,7 @@ dependencies = [
 
 [[package]]
 name = "tiny_ed448_goldilocks"
-version = "0.6.2"
+version = "0.1.0"
 dependencies = [
  "byteorder",
  "capycrypt",
@@ -673,8 +673,6 @@ dependencies = [
  "crypto-bigint",
  "fiat-crypto",
  "hex",
- "num",
- "num-bigint",
  "rand",
 ]
 
