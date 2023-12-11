@@ -88,7 +88,7 @@ Using this crate as the elliptic-curve backend for [capyCRYPT](https://github.co
 /// Signs a [`Message`] under passphrase pw.
 ///
 /// ## Algorithm:
-/// * `s` ← kmac_xof(pw, “”, 448, “K”); s ← 4s
+/// * `s` ← kmac_xof(pw, “”, 448, “SK”); s ← 4s
 /// * `k` ← kmac_xof(s, m, 448, “N”); k ← 4k
 /// * `𝑈` ← k*𝑮;
 /// * `ℎ` ← kmac_xof(𝑈ₓ , m, 448, “T”); 𝑍 ← (𝑘 – ℎ𝑠) mod r
@@ -122,7 +122,7 @@ cargo bench
 
 Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
 
-| Operation   | ~Time (ms)  | OpenSSL |
+| Operation   | ~Time (ms)  | OpenSSL (ms) |
 |------------|------------|------------|
 | Encrypt| 75 | |
 | Decrypt| 75 | |
@@ -132,4 +132,4 @@ Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
 
 ## Acknowledgements
 
-The authors wish to sincerely thank Dr. Paulo Barreto for the general design of this library as well as the curve functionality. We also wish to extend gratitude to the curve-dalek authors [here](https://github.com/crate-crypto/Ed448-Goldilocks) and [here](https://docs.rs/curve25519-dalek/4.1.1/curve25519_dalek/) for the excellent reference implementations and exemplary instances of rock-solid cryptography. Thanks to [otsmr](https://github.com/otsmr) for the callout on the original attempt at an affine-coordinate Montgomery ladder.
+The authors wish to sincerely thank Dr. Paulo Barreto for consultation on the fixed-time operations and his work in the field in general. We also wish to extend gratitude to the curve-dalek authors [here](https://github.com/crate-crypto/Ed448-Goldilocks) and [here](https://docs.rs/curve25519-dalek/4.1.1/curve25519_dalek/) for the excellent reference implementations and exemplary instances of rock-solid cryptography. Thanks to [otsmr](https://github.com/otsmr) for the callout on the original attempt at an affine-coordinate Montgomery ladder.
