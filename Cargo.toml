@@ -4,10 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 license = "MIT"
-keywords = ["ed448-goldilocks", "elliptic-curve", "side-channel-analysis", "ed448", "schnorr"]
+keywords = ["ed448-goldilocks", "elliptic-curve", "ed448", "schnorr"]
 readme = "README.md"
 authors = ["Dustin Ray (Dr. Capybara) <dustinray313@gmail.com>"]
-description = "A lean, pure rust implementation of Ed448-Goldilocks for easy signatures and key exchange."
+description = "A lean, high performance, pure rust implementation of Ed448-Goldilocks for easy signatures and key exchange."
 repository = "https://github.com/drcapybara/tiny_ed448_goldilocks"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
