@@ -5,6 +5,8 @@
   <img src="./img.webp" width="250" height="250">
 </p>
 
+> WARNING: This software has not been audited. Use at your own risk.
+
 # 1. Objective:
 
 The Goldilocks variant of curves in Edward's form present a compelling balance of security and performance. We wish to leverage this curve to satisfy that the following group properties hold:
