@@ -2,8 +2,8 @@ use super::{extended_edwards::ExtendedPoint, field::field_element::FieldElement}
 
 #[derive(Debug)]
 pub struct AffinePoint {
-    pub(crate) x: FieldElement,
-    pub(crate) y: FieldElement,
+    pub x: FieldElement,
+    pub y: FieldElement,
 }
 
 impl AffinePoint {
