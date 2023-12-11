@@ -131,12 +131,13 @@ cargo bench
 
 Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
 
-| Operation   | ~Time (ms)  |
-|------------|------------|
-| Encrypt| 75 |
-| Decrypt| 75 |
-| Sign| 42 |
-| Verify| 18 |
+| Operation   | ~Time (ms)  | OpenSSL |
+|------------|------------|------------|
+| Encrypt| 75 | |
+| Decrypt| 75 | |
+| Sign| 42 | 15 |
+| Verify| 18 | |
+
 
 ## Acknowledgements
 
