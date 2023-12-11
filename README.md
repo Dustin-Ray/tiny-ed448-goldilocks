@@ -7,6 +7,8 @@
 
 > WARNING: This software has not been audited. Use at your own risk.
 
+[![crates.io](https://img.shields.io/crates/v/tiny_ed448_goldilocks.svg)](https://crates.io/crates/tiny_ed448_goldilocks)
+
 # 1. Objective:
 
 The Goldilocks variant of curves in Edward's form present a compelling balance of security and performance. We wish to leverage this curve to satisfy that the following group properties hold:
