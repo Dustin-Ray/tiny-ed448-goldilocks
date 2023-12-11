@@ -77,42 +77,6 @@ pub fn select(&self, index: u32) -> ProjectiveNielsPoint {
 ```
 This ensures fixed-time multiplication without the need for a curve point in Montgomery form. Further, we make use of the [crypto-bigint](https://github.com/RustCrypto/crypto-bigint) library which ensures fixed-time operations for our Scalar type. Field elements are represented by the fiat-crypto [p448-solinas-64](https://github.com/mit-plv/fiat-crypto/blob/master/fiat-rust/src/p448_solinas_64.rs) prime field. It is formally verified and heavily optimized at the machine-level.
 
-The following test:
-
-```rust
-#[test]
-fn test_sig_timing_side_channel() {
-    for i in 0..10 {
-        let mut msg = Message::new(get_random_bytes(5242880));
-        let pw = get_random_bytes(16 << i);
-        let mut key_pair = KeyPair::new(&pw, "test key".to_string(), 512);
-
-        let now = Instant::now();
-        msg.sign(&mut key_pair, 512);
-        println!("{} needed {} microseconds", i, now.elapsed().as_micros());
-        msg.verify(&key_pair.pub_key);
-        assert!(msg.op_result.unwrap());
-    }
-}
-```
-
-Displays fixed-time execution over a range of key sizes:
-```
-running 1 test
-0 needed 46608 microseconds
-1 needed 43783 microseconds
-2 needed 44706 microseconds
-3 needed 45827 microseconds
-4 needed 45121 microseconds
-5 needed 44641 microseconds
-6 needed 44427 microseconds
-7 needed 44661 microseconds
-8 needed 44431 microseconds
-9 needed 44638 microseconds
-```
-
-This is by no means a complete assessment of the security of this implementation, but it's a good signal that the fixed-time backend is doing what we expect. Nothing about the size of the secret key is being revealed by runtime here
-
 # 4. Benchmarks
 
 Run with:
