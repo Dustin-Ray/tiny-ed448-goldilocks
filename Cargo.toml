@@ -32,3 +32,7 @@ opt-level = 3
 
 [profile.test] 
 opt-level = 3
+
+[[bench]]
+name = "benchmark_e448_512"
+harness = false

@@ -49,7 +49,7 @@ pub mod ops_tests {
     fn test_sig_timing_side_channel() {
         for i in 0..10 {
             let mut msg = Message::new(get_random_bytes(5242880));
-            let pw = get_random_bytes(1 << i);
+            let pw = get_random_bytes(16 << i);
             let mut key_pair = KeyPair::new(&pw, "test key".to_string(), 512);
 
             let now = Instant::now();
