@@ -10,7 +10,7 @@ use tiny_ed448_goldilocks::curve::{
 
 #[test]
 // 0 * G = 𝒪
-pub fn test_g_times_zero_id() {
+pub fn zerog_id() {
     let p = ExtendedPoint::tw_generator();
     let zero = Scalar::from(0_u64);
     let res = p * zero;
@@ -21,7 +21,7 @@ pub fn test_g_times_zero_id() {
 
 #[test]
 // G * 1 = G
-pub fn test_g_times_one_g() {
+pub fn oneg_g() {
     let p = ExtendedPoint::tw_generator();
     let one = Scalar::from(1_u64);
     let res = p * one;
@@ -32,7 +32,7 @@ pub fn test_g_times_one_g() {
 
 // G + (-G) = 𝒪
 #[test]
-fn test_g_plus_neg_g() {
+fn gminusg_id() {
     let g = ExtendedPoint::tw_generator();
     let neg_g = ExtendedPoint::tw_generator().negate();
     let id = g.add(&neg_g);
@@ -42,7 +42,7 @@ fn test_g_plus_neg_g() {
 
 #[test]
 // 2 * G = G + G
-pub fn test_g_times_two_g_plus_g() {
+pub fn twog_gplusg() {
     let g: ExtendedPoint = ExtendedPoint::tw_generator();
     let two = Scalar::from(2_u64);
     let res = g * two;
@@ -53,7 +53,7 @@ pub fn test_g_times_two_g_plus_g() {
 
 #[test]
 // 4 * G = 2 * (2 * G)
-fn test_four_g() {
+fn fourg_twotwoG() {
     let four_g = ExtendedPoint::tw_generator() * Scalar::from(4_u64);
     let two_times_two_g = (ExtendedPoint::tw_generator().double()).double();
 
@@ -62,7 +62,7 @@ fn test_four_g() {
 
 #[test]
 //4 * G != 𝒪
-fn test_four_g_not_id() {
+fn fourg_not_id() {
     let four_g = ExtendedPoint::tw_generator() * Scalar::from(4_u64);
     let tw_four_g = ExtendedPoint::tw_generator() * Scalar::from(4_u64);
     let id = ExtendedPoint::id_point();
@@ -73,7 +73,7 @@ fn test_four_g_not_id() {
 
 #[test]
 //r*G = 𝒪
-fn r_times_g_id() {
+fn rg_id() {
     let mut g = ExtendedPoint::tw_generator();
     g = g * Scalar::from(U448::from_be_hex(R_448));
     let id = ExtendedPoint::id_point();
@@ -83,7 +83,7 @@ fn r_times_g_id() {
 
 #[test]
 // k * G = (k mod r) * G
-fn k_g_equals_k_mod_r_times_g() {
+fn kg_kmodrg() {
     use rand::Rng;
     let mut rng = rand::thread_rng();
     let random_number: u64 = rng.gen();
@@ -104,7 +104,7 @@ fn k_g_equals_k_mod_r_times_g() {
 
 #[test]
 // (k + 1)*G = (k*G) + G
-fn k_plus_one_g() {
+fn k_plus_g() {
     let mut rng = rand::thread_rng();
     let k = rand::Rng::gen::<u64>(&mut rng);
 
@@ -117,7 +117,7 @@ fn k_plus_one_g() {
 
 #[test]
 //(k + t)*G = (k*G) + (t*G)
-fn k_t() {
+fn ktG_kgplustg() {
     let mut rng = rand::thread_rng();
     let k: u32 = rand::Rng::gen::<u32>(&mut rng);
     let t: u32 = rand::Rng::gen::<u32>(&mut rng);
@@ -134,7 +134,7 @@ fn k_t() {
 
 #[test]
 //k*(t*G) = t*(k*G) = (k*t mod r)*G
-fn test_ktg() {
+fn ktG_tkG_ktmodrG() {
     let mut rng = rand::thread_rng();
     let k: u32 = rand::Rng::gen::<u32>(&mut rng);
     let t: u32 = rand::Rng::gen::<u32>(&mut rng);

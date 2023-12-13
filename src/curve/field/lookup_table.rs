@@ -19,7 +19,7 @@ impl From<&ExtendedPoint> for LookupTable {
 impl LookupTable {
     /// Selects a projective niels point from a lookup table in fixed-time
     pub fn select(&self, index: u32) -> ProjectiveNielsPoint {
-        let mut result = ProjectiveNielsPoint::id_point();
+        let mut result = ProjectiveNielsPoint::identity();
         for i in 1..9 {
             let swap = index.ct_eq(&(i as u32));
             result.conditional_assign(&self.0[i - 1], swap);

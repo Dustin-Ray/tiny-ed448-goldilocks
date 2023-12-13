@@ -28,10 +28,10 @@ pub struct ExtendedPoint {
 }
 
 impl ExtendedPoint {
-    /// Performs variable-base scalar multiplication on an elliptic curve point.
+    /// Performs fixed-base scalar multiplication on an elliptic curve point.
     ///
     /// This function multiplies an elliptic curve point (`point`) with a scalar (`s`) and returns
-    /// the resulting point. It is optimized for variable-base multiplication, which is a common
+    /// the resulting point. It is optimized for fixed-base multiplication, which is a common
     /// operation in elliptic curve cryptography, particularly in contexts like key exchange or
     /// digital signature generation.
     ///
@@ -59,7 +59,7 @@ impl ExtendedPoint {
     /// # Returns
     ///
     /// An `ExtendedPoint` that is the result of the scalar multiplication of `point` by `s`.
-    pub fn variable_base(point: &ExtendedPoint, s: &Scalar) -> ExtendedPoint {
+    pub fn fixed_base(point: &ExtendedPoint, s: &Scalar) -> ExtendedPoint {
         // We make use of the faster doubling for TwistedPoint
         let mut result = TwistedPoint::identity();
 
@@ -206,7 +206,7 @@ impl ConditionallySelectable for ExtendedPoint {
 impl Mul<Scalar> for ExtendedPoint {
     type Output = ExtendedPoint;
     fn mul(self, scalar: Scalar) -> ExtendedPoint {
-        ExtendedPoint::variable_base(&self, &scalar)
+        ExtendedPoint::fixed_base(&self, &scalar)
     }
 }
 

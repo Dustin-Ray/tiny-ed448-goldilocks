@@ -1,5 +1,8 @@
 #![allow(non_snake_case)]
-use super::{field::field_element::FieldElement, twisted_edwards::TwistedPoint};
+use super::{
+    extended_edwards::ExtendedPoint, field::field_element::FieldElement,
+    twisted_edwards::TwistedPoint,
+};
 use crypto_bigint::subtle::{Choice, ConditionallyNegatable, ConditionallySelectable};
 
 // Variant of Niels, where a Z coordinate is added for unmixed readdition
@@ -13,8 +16,26 @@ pub struct ProjectiveNielsPoint {
 }
 
 impl ProjectiveNielsPoint {
-    pub fn id_point() -> ProjectiveNielsPoint {
+    pub fn identity() -> ProjectiveNielsPoint {
         TwistedPoint::identity().to_projective_niels()
+    }
+
+    pub fn double(&self) -> ProjectiveNielsPoint {
+        self.to_extended()
+            .to_extensible()
+            .double()
+            .to_projective_niels()
+    }
+
+    pub fn to_extended(&self) -> ExtendedPoint {
+        let A = self.Y_plus_X - self.Y_minus_X;
+        let B = self.Y_plus_X + self.Y_minus_X;
+        ExtendedPoint {
+            X: self.Z * A,
+            Y: self.Z * B,
+            Z: self.Z.square(),
+            T: B * A,
+        }
     }
 }
 
