@@ -129,6 +129,7 @@ Approximate runtimes for Intel® Core™ i7-10710U × 12 on 5mb random data:
 | Sign| 42 | 15 |
 | Verify| 18 | |
 
+Our custom SHA3 performs as good as OpenSSL, but at this time we don't know what the hashing backend is for the experiments on that end. So some of this overhead might come from the use of SHA3 vs a more optimized hasher on OpenSSL's part like SHA2 for instance. Still, this performance is vastly superior to our previous attempt at using exclusively affine coordinates.
 
 ## Acknowledgements
 
