@@ -104,7 +104,7 @@ fn sign(&mut self, key: &KeyPair, d: u64) {
     let k: Scalar =
         bytes_to_scalar(kmac_xof(&s_bytes, &self.msg, 448, "N", d)) * (Scalar::from(4_u64));
 
-    let U = ExtendedPoint::tw_generator() * k;
+    let U = ExtendedPoint::generator() * k;
     let ux_bytes = U.to_affine().x.to_bytes().to_vec();
     let h = kmac_xof(&ux_bytes, &self.msg, 448, "T", d);
     let h_big = bytes_to_scalar(h.clone());
