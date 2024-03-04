@@ -69,17 +69,6 @@ impl Scalar {
         }
     }
 
-    // this is a bummer, will fix asap
-    pub fn mul_mod_r(&self, rhs: &Scalar) -> Scalar {
-        let self_val: U448 = self.val;
-        let rhs_val: U448 = rhs.val;
-        let a = const_residue!(self_val, R);
-        let b = const_residue!(rhs_val, R);
-        Scalar {
-            val: a.mul(&b).retrieve(),
-        }
-    }
-
     /// Converts a scalar value from radix 256 to radix 16. Borrowed from the dalek authors.
     ///
     /// This function takes a scalar value (`self`) and converts it from a byte representation

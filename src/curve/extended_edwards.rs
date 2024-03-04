@@ -16,9 +16,7 @@ use std::ops::{Add, Mul, Neg};
 /// with the additional constraint that T = XY/Z.
 ///
 /// This representation allows certain operations, like point doubling and
-/// addition, to be performed more efficiently.The Edwards curve equation in
-/// extended coordinates doesn't change form but utilizes the T coordinate
-/// to simplify the calculation of some operations.
+/// addition, to be performed more efficiently.
 #[derive(Debug, Clone, Copy)]
 pub struct ExtendedPoint {
     pub X: FieldElement,
@@ -140,7 +138,7 @@ impl ExtendedPoint {
     // ------------------------------
 
     /// Generates the 2-isogenous twisted curve
-    pub fn tw_generator() -> ExtendedPoint {
+    pub fn generator() -> ExtendedPoint {
         ExtendedPoint {
             X: FieldElement(fiat_p448_tight_field_element([
                 0,
