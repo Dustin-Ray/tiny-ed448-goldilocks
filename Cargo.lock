@@ -85,7 +85,7 @@ checksum = "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
 
 [[package]]
 name = "tiny_ed448_goldilocks"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "crypto-bigint",
  "fiat-crypto",
