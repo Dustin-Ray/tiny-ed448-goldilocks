@@ -17,7 +17,9 @@ use std::ops::{Add, Mul, Neg};
 ///
 /// This representation allows certain operations, like point doubling and
 /// addition, to be performed more efficiently.
-#[derive(Debug, Clone, Copy)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub struct ExtendedPoint {
     pub X: FieldElement,
     pub Y: FieldElement,

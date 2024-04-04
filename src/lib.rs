@@ -7,6 +7,7 @@ pub mod curve {
     pub mod twisted_edwards;
     pub mod field {
         pub mod field_element;
+        pub mod field_element_serde;
         pub mod lookup_table;
         pub mod scalar;
     }
