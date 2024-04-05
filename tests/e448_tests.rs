@@ -156,17 +156,11 @@ use serde_json; // Ensure serde_json is added to your Cargo.toml for this
 
 #[test]
 fn extended_point_serde_round_trip() {
-    // Step 1: Serialize the original ExtendedPoint
     let original_point = ExtendedPoint::generator();
     let serialized_point =
         serde_json::to_string(&original_point).expect("Failed to serialize ExtendedPoint");
-
-    // Step 2: Deserialize back to an ExtendedPoint
     let deserialized_point: ExtendedPoint =
         serde_json::from_str(&serialized_point).expect("Failed to deserialize ExtendedPoint");
-
-    // Step 3: Assertions for correctness
-    // Assert that the deserialized ExtendedPoint matches the original
     assert_eq!(
         original_point, deserialized_point,
         "Deserialized ExtendedPoint does not match the original"
