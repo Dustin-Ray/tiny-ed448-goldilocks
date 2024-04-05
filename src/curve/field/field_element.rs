@@ -2,13 +2,13 @@ use crypto_bigint::subtle::{
     Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq,
 };
 use fiat_crypto::p448_solinas_64::*;
-use std::ops::{Add, Mul, Sub};
+use core::ops::{Add, Mul, Sub};
 
 #[derive(Copy, Clone)]
 pub struct FieldElement(pub(crate) fiat_p448_tight_field_element);
 
-impl std::fmt::Debug for FieldElement {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl core::fmt::Debug for FieldElement {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         f.debug_tuple("FieldElement").field(&self.0 .0).finish()
     }
 }

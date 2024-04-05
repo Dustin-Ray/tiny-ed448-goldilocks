@@ -1,4 +1,4 @@
-use std::ops::{Mul, Sub};
+use core::ops::{Mul, Sub};
 
 use crypto_bigint::{
     const_residue, impl_modulus,

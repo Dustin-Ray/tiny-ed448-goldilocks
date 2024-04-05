@@ -8,7 +8,7 @@ use crypto_bigint::subtle::{
     Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq,
 };
 use fiat_crypto::p448_solinas_64::*;
-use std::ops::{Add, Mul, Neg};
+use core::ops::{Add, Mul, Neg};
 
 /// Extends projective coordinates by adding an additional
 /// auxiliary coordinate to speed up certain calculations.

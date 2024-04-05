@@ -1,7 +1,7 @@
 use base64::Engine;
 use serde::de::{self, Visitor};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
-use std::fmt;
+use core::fmt;
 
 use super::field_element::FieldElement;
 

@@ -1,3 +1,5 @@
+#![no_std]
+
 #![warn(clippy::just_underscores_and_digits)]
 /// Module for all EC operations.
 pub mod curve {
