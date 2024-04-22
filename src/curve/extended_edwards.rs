@@ -4,11 +4,11 @@ use super::{
     field::{field_element::FieldElement, lookup_table::LookupTable, scalar::Scalar},
     twisted_edwards::TwistedPoint,
 };
+use core::ops::{Add, Mul, Neg};
 use crypto_bigint::subtle::{
     Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq,
 };
 use fiat_crypto::p448_solinas_64::*;
-use core::ops::{Add, Mul, Neg};
 
 /// Extends projective coordinates by adding an additional
 /// auxiliary coordinate to speed up certain calculations.

@@ -6,6 +6,7 @@ use crypto_bigint::{
     subtle::{Choice, ConstantTimeEq},
     Encoding, U448,
 };
+use serde::{Deserialize, Serialize};
 
 /// Order of the curve. Distinct from field prime.
 pub const R_448: &str = "3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7CCA23E9C44EDB49AED63690216CC2728DC58F552378C292AB5844F3";
@@ -14,7 +15,7 @@ impl_modulus!(R, U448, R_448);
 
 /// https://www.shiftleft.org/papers/isogeny/isogeny.pdf
 /// page 4 specifies s is always known to be a multiple of 4
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Scalar {
     pub val: U448,
 }

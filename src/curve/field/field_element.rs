@@ -1,8 +1,8 @@
+use core::ops::{Add, Mul, Sub};
 use crypto_bigint::subtle::{
     Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq,
 };
 use fiat_crypto::p448_solinas_64::*;
-use core::ops::{Add, Mul, Sub};
 
 #[derive(Copy, Clone)]
 pub struct FieldElement(pub(crate) fiat_p448_tight_field_element);

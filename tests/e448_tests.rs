@@ -67,8 +67,8 @@ fn fourg_not_id() {
     let tw_four_g = ExtendedPoint::generator() * Scalar::from(4_u64);
     let id = ExtendedPoint::id_point();
 
-    assert!(!(&four_g == &id));
-    assert!(!(&tw_four_g == &id))
+    assert!(!(four_g == id));
+    assert!(!(tw_four_g == id))
 }
 
 #[test]
@@ -78,7 +78,7 @@ fn rg_id() {
     g = g * Scalar::from(U448::from_be_hex(R_448));
     let id = ExtendedPoint::id_point();
 
-    assert!(&g == &id)
+    assert!(g == id)
 }
 
 #[test]
@@ -95,7 +95,7 @@ fn kg_kmodrg() {
     let mut k_mod_r_timesg = ExtendedPoint::generator();
     k_mod_r_timesg = k_mod_r_timesg * (Scalar::from(k_mod_r.0));
 
-    assert!(&gk == &k_mod_r_timesg)
+    assert!(gk == k_mod_r_timesg)
 }
 
 #[test]
@@ -104,11 +104,11 @@ fn k_plus_g() {
     let mut rng = rand::thread_rng();
     let k = rand::Rng::gen::<u64>(&mut rng);
 
-    let k1_g = ExtendedPoint::generator() * Scalar::from::<u64>((k + 1).into());
-    let k_g1 = (ExtendedPoint::generator() * Scalar::from::<u64>(k.into()))
-        .add(&ExtendedPoint::generator());
+    let k1_g = ExtendedPoint::generator() * Scalar::from::<u64>(k + 1);
+    let k_g1 =
+        (ExtendedPoint::generator() * Scalar::from::<u64>(k)).add(&ExtendedPoint::generator());
 
-    assert!(&k1_g == &k_g1)
+    assert!(k1_g == k_g1)
 }
 
 #[test]
@@ -152,7 +152,7 @@ fn ktG_tkG_ktmodrG() {
     assert!(kt_modr_g == ktg);
 }
 
-use serde_json; // Ensure serde_json is added to your Cargo.toml for this
+// Ensure serde_json is added to your Cargo.toml for this
 
 #[test]
 fn extended_point_serde_round_trip() {
