@@ -1,6 +1,6 @@
 [package]
 name = "tiny_ed448_goldilocks"
-version = "0.1.7"
+version = "0.1.8"
 edition = "2021"
 
 license = "MIT"
@@ -14,7 +14,7 @@ repository = "https://github.com/drcapybara/tiny_ed448_goldilocks"
 
 [dependencies]
 base64 = "0.22.0"
-crypto-bigint = {version = "0.5.4", features = ["serde"] }
+crypto-bigint = {version = "0.5.3", features = ["serde"] }
 fiat-crypto = "0.2.2"
 rand = "0.8"
 serde = { version = "1.0", features = ["derive"] }

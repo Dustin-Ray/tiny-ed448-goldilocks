@@ -180,7 +180,7 @@ dependencies = [
 
 [[package]]
 name = "tiny_ed448_goldilocks"
-version = "0.1.7"
+version = "0.1.8"
 dependencies = [
  "base64",
  "crypto-bigint",
