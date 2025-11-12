@@ -1,12 +1,12 @@
 [package]
 name = "tiny_ed448_goldilocks"
-version = "0.1.8"
+version = "0.2.0"
 edition = "2021"
 
 license = "MIT"
 keywords = ["ed448-goldilocks", "elliptic-curve", "ed448", "schnorr"]
 readme = "README.md"
-authors = ["Dustin Ray (Dr. Capybara) <dustinray313@gmail.com>"]
+authors = ["Dustin Ray (Dr. Capybara) <dustinray117@pm.me>"]
 description = "A lean, high performance, pure rust implementation of Ed448-Goldilocks for easy signatures and key exchange."
 repository = "https://github.com/drcapybara/tiny_ed448_goldilocks"
 
