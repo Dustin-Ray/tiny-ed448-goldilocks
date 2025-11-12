@@ -6,7 +6,9 @@ use crypto_bigint::{
     subtle::{Choice, ConstantTimeEq},
     Encoding, U448,
 };
+use hybrid_array::{typenum::U113, Array as HybridArray};
 use serde::{Deserialize, Serialize};
+use zeroize::Zeroize;
 
 /// Order of the curve. Distinct from field prime.
 pub const R_448: &str = "3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7CCA23E9C44EDB49AED63690216CC2728DC58F552378C292AB5844F3";
@@ -15,9 +17,25 @@ impl_modulus!(R, U448, R_448);
 
 /// https://www.shiftleft.org/papers/isogeny/isogeny.pdf
 /// page 4 specifies s is always known to be a multiple of 4
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+/// 
+/// Note: This type implements Copy for performance reasons required by cryptographic operations,
+/// but also implements Zeroize. Users should explicitly call zeroize() on sensitive scalar values
+/// when they are no longer needed to ensure secure memory cleanup.
+#[derive(Copy, Clone, Serialize, Deserialize, Zeroize)]
 pub struct Scalar {
     pub val: U448,
+}
+
+impl core::fmt::Debug for Scalar {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "Scalar(****)")
+    }
+}
+
+impl core::fmt::Display for Scalar {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "Scalar(REDACTED)")
+    }
 }
 
 impl Scalar {
@@ -99,11 +117,11 @@ impl Scalar {
     ///
     /// # Returns
     ///
-    /// An array of 113 `i8` elements, each representing a nibble of the original scalar in radix 16.
+    /// A HybridArray of 113 `i8` elements, each representing a nibble of the original scalar in radix 16.
     /// ```
-    pub(crate) fn to_radix_16(self) -> [i8; 113] {
+    pub(crate) fn to_radix_16(self) -> HybridArray<i8, U113> {
         let bytes = self.val.to_le_bytes();
-        let mut output = [0i8; 113];
+        let mut output = HybridArray::<i8, U113>::default();
 
         // Convert from radix 256 (bytes) to radix 16 (nibbles)
         #[inline(always)]

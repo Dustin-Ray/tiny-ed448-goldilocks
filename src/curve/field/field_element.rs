@@ -3,13 +3,27 @@ use crypto_bigint::subtle::{
     Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq,
 };
 use fiat_crypto::p448_solinas_64::*;
+use hybrid_array::{typenum::U56, Array as HybridArray};
+use zeroize::Zeroize;
 
 #[derive(Copy, Clone)]
 pub struct FieldElement(pub(crate) fiat_p448_tight_field_element);
 
 impl core::fmt::Debug for FieldElement {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        f.debug_tuple("FieldElement").field(&self.0 .0).finish()
+        write!(f, "FieldElement(****)")
+    }
+}
+
+impl core::fmt::Display for FieldElement {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "FieldElement(REDACTED)")
+    }
+}
+
+impl Zeroize for FieldElement {
+    fn zeroize(&mut self) {
+        self.0 .0.zeroize();
     }
 }
 
@@ -45,7 +59,14 @@ impl FieldElement {
     }
 
     // We encode the Field element by storing each consecutive into a u64
-    pub fn to_bytes(&self) -> [u8; 56] {
+    pub fn to_bytes(&self) -> HybridArray<u8, U56> {
+        let mut res = HybridArray::<u8, U56>::default();
+        fiat_p448_to_bytes(res.as_mut_slice().try_into().unwrap(), &self.0);
+        res
+    }
+
+    /// Legacy method for compatibility - converts to regular array
+    pub fn to_bytes_array(&self) -> [u8; 56] {
         let mut res = [0u8; 56];
         fiat_p448_to_bytes(&mut res, &self.0);
         res
@@ -59,7 +80,14 @@ impl FieldElement {
     /// This does not check if the encoding is canonical (ie if the input is reduced)
     /// We parse in chunks of 56 bytes, the first 28 bytes will contain the i'th limb
     /// and the second 28 bytes will contain the (2i+1)'th limb
-    pub fn from_bytes(bytes: &[u8; 56]) -> FieldElement {
+    pub fn from_bytes(bytes: &HybridArray<u8, U56>) -> FieldElement {
+        let mut res = FieldElement::zero();
+        fiat_p448_from_bytes(&mut res.0, bytes.as_slice().try_into().unwrap());
+        res
+    }
+
+    /// Legacy method for compatibility - accepts regular array
+    pub fn from_bytes_array(bytes: &[u8; 56]) -> FieldElement {
         let mut res = FieldElement::zero();
         fiat_p448_from_bytes(&mut res.0, bytes);
         res
@@ -135,7 +163,7 @@ impl FieldElement {
 
 impl ConstantTimeEq for FieldElement {
     fn ct_eq(&self, other: &Self) -> Choice {
-        self.to_bytes().ct_eq(&other.to_bytes())
+        self.to_bytes().as_slice().ct_eq(other.to_bytes().as_slice())
     }
 }
 

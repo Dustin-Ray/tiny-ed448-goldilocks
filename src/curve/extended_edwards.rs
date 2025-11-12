@@ -18,13 +18,26 @@ use fiat_crypto::p448_solinas_64::*;
 /// This representation allows certain operations, like point doubling and
 /// addition, to be performed more efficiently.
 use serde::{Deserialize, Serialize};
+use zeroize::Zeroize;
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+#[derive(Serialize, Deserialize, Copy, Clone, Zeroize)]
 pub struct ExtendedPoint {
     pub X: FieldElement,
     pub Y: FieldElement,
     pub Z: FieldElement,
     pub T: FieldElement,
+}
+
+impl core::fmt::Debug for ExtendedPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "ExtendedPoint(****)")
+    }
+}
+
+impl core::fmt::Display for ExtendedPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "ExtendedPoint(REDACTED)")
+    }
 }
 
 impl ExtendedPoint {

@@ -4,15 +4,34 @@ use super::{
     twisted_edwards::TwistedPoint,
 };
 use crypto_bigint::subtle::{Choice, ConditionallyNegatable, ConditionallySelectable};
+use zeroize::Zeroize;
 
 // Variant of Niels, where a Z coordinate is added for unmixed readdition
 // ((y+x)/2, (y-x)/2, dxy, Z)
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Zeroize)]
 pub struct ProjectiveNielsPoint {
     pub Y_plus_X: FieldElement,
     pub Y_minus_X: FieldElement,
     pub Td: FieldElement,
     pub Z: FieldElement,
+}
+
+impl core::fmt::Debug for ProjectiveNielsPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "ProjectiveNielsPoint(****)")
+    }
+}
+
+impl core::fmt::Display for ProjectiveNielsPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "ProjectiveNielsPoint(REDACTED)")
+    }
+}
+
+impl Default for ProjectiveNielsPoint {
+    fn default() -> Self {
+        Self::identity()
+    }
 }
 
 impl ProjectiveNielsPoint {

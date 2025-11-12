@@ -14,11 +14,13 @@ repository = "https://github.com/drcapybara/tiny_ed448_goldilocks"
 
 [dependencies]
 base64 = "0.22.0"
-crypto-bigint = {version = "0.5.3", features = ["serde"] }
+crypto-bigint = {version = "0.5.3", features = ["serde", "zeroize"] }
 fiat-crypto = "0.2.2"
+hybrid-array = { version = "0.2", features = ["zeroize"] }
 rand = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.115"
+zeroize = { version = "1.7", features = ["derive"] }
 
 [profile.dev]
 opt-level = 0

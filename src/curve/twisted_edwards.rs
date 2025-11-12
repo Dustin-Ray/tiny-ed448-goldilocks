@@ -4,6 +4,7 @@ use super::{
     projective_niels::ProjectiveNielsPoint,
 };
 use fiat_crypto::p448_solinas_64::fiat_p448_tight_field_element;
+use zeroize::{Zeroize, ZeroizeOnDrop};
 
 // ------------------------------
 // CONSTANTS
@@ -33,12 +34,25 @@ pub const TWISTED_D: FieldElement = FieldElement(fiat_p448_tight_field_element([
     144115188075855870,
 ]));
 
+#[derive(Zeroize, ZeroizeOnDrop)]
 pub struct TwistedPoint {
     pub X: FieldElement,
     pub Y: FieldElement,
     pub Z: FieldElement,
     pub T1: FieldElement,
     pub T2: FieldElement,
+}
+
+impl core::fmt::Debug for TwistedPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "TwistedPoint(****)")
+    }
+}
+
+impl core::fmt::Display for TwistedPoint {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "TwistedPoint(REDACTED)")
+    }
 }
 
 impl TwistedPoint {

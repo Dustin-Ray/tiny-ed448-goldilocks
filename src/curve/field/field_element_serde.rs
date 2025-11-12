@@ -11,7 +11,7 @@ impl Serialize for FieldElement {
         S: Serializer,
     {
         let bytes = self.to_bytes();
-        let base64_str = general_purpose::STANDARD.encode(bytes);
+        let base64_str = general_purpose::STANDARD.encode(bytes.as_slice());
         serializer.serialize_str(&base64_str)
     }
 }
@@ -46,6 +46,6 @@ impl<'de> Visitor<'de> for FieldElementVisitor {
             .clone()
             .try_into()
             .map_err(|_| de::Error::invalid_length(bytes.len(), &self))?;
-        Ok(FieldElement::from_bytes(&arr))
+        Ok(FieldElement::from_bytes_array(&arr))
     }
 }
